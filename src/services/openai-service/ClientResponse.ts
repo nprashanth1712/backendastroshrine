@@ -26,11 +26,16 @@ export const generateAstrologerAboutMe = async ({
 
     console.log("the prompt is ", filledPrompt)
 
+    if (!openAIClient) {
+        console.log("OpenAI client not configured, returning default about me");
+        return "Experienced astrologer dedicated to providing insightful guidance.";
+    }
+
     const response = await openAIClient.responses.create({
         model: "gpt-3.5-turbo",
         input: filledPrompt
     })
 
     console.log("The about me is ", response.output_text)
-    return await response.output_text
+    return response.output_text
 };

@@ -51,7 +51,7 @@ export const handleUpdateUserNotificationRead = async ({
 	notificationId: string;
 	readStatus: boolean;
 }) => {
-	const userNotifications: NotificationTable= await getUserNotificationsByUserId({id});
+	const userNotifications = await getUserNotificationsByUserId({id}) as NotificationTable | null;
 	console.log("User notoi", userNotifications)
 	if (!userNotifications?.id) {
 		throw {

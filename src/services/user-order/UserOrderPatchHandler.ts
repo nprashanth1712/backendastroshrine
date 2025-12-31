@@ -76,25 +76,30 @@ const handleUpdateUserOrderTentativeTs = async ({ userId, ts, value }: { userId:
 		throw {statusCode: 400, code: "MissingParameter", message: {err: missingParameter("value")}}
 	}
 
-	if (userData.currentUserOrder?.channelId) {
+	if (!userData?.currentUserOrder?.channelId) {
 		throw { statusCode: 400, code: "UserIsNotInChannel", message: "The user is not in any channel" };
 	}
-	const channelIndex = await getLatestOnlineHostChannel({ channelId: userData.currentUserOrder?.channelId });
-	const channel = channelIndex.find((value) => value.channelType.toLowerCase() == userData.currentUserOrder.channelType);
+	const channelIndex = await getLatestOnlineHostChannel({ channelId: userData.currentUserOrder.channelId });
+	const channel = channelIndex.find((ch) => ch.channelType.toLowerCase() == userData.currentUserOrder?.channelType?.toLowerCase());
 	if (!channel?.channelId) {
 		throw { statusCode: 404, code: "ChannelNotFound", message: "The channel does not exist or is offline" };
 	}
 	const channelData = await getHostChannel(channel);
-	const { tempHost } = channelData;
-	tempHost.orderTentativeEndTs = value;
+	if (!channelData) {
+		throw { statusCode: 404, code: "ChannelNotFound", message: "Channel data not found" };
+	}
+	const tempHost = (channelData as any).tempHost;
+	if (tempHost) {
+		tempHost.orderTentativeEndTs = value;
+	}
 	const updatedUserOrderTentativeTs: UserOrder = await updateUserOrderTentativeTs({
 		userId,
 		ts,
-		channel: { channelId: channelData?.channelId, createTs: channelData?.createTs, tempHost },
+		channel: { channelId: channelData.channelId || '', createTs: channelData.createTs || 0, tempHost },
 	});
 	await publishMessage({
-		uri: `public_${channelData?.channelId}`,
-		action: `${tempHost?.channelType.toUpperCase()}_TEMPHOST_UPDATE`,
+		uri: `public_${channelData.channelId}`,
+		action: `${tempHost?.channelType?.toUpperCase() || 'UNKNOWN'}_TEMPHOST_UPDATE`,
 		message: tempHost,
 	});
 	console.log("User order update patch pusher done")
