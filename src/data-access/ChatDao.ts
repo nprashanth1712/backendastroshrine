@@ -289,7 +289,7 @@ const updateChatKeyUsersList = async ({
 			ReturnValues: "ALL_NEW",
 		};
 		const response = await dynamoClient.update(params).promise();
-		return (response.Attributes as PrivateChatKey) || {};
+		return (response.Attributes || {}) as PrivateChatKey;
 	} catch (error) {
 		console.error("Error updating item:", error);
 		throw Error("Unable to update: updateUser");
@@ -311,7 +311,7 @@ const updateUserChatSession = async ({ id, status }: { id: string; status: strin
 			ReturnValues: "ALL_NEW",
 		};
 		const response = await dynamoClient.update(params).promise();
-		return (response.Attributes as PrivateChatKey) || {};
+		return (response.Attributes || {}) as PrivateChatKey;
 	} catch (error) {
 		console.error("Error updating item:", error);
 		throw Error("Unable to update: updateUser");

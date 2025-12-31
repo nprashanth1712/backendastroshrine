@@ -11,7 +11,7 @@ import {
     generateRTCToken,
     getActiveUserSessionList,
     getUserSessionByUserIdDeviceId,
-} from "../data-access/SessionDao";
+} from "../data-access/sessionDao";
 import { nextUID } from "../data-access/UserDao";
 import { UserSession } from "../types/session/session";
 
