@@ -41,7 +41,7 @@ import { Astrologer, AstrologerCurrentChannel } from "../types/astrologer/Astrol
 import { AssertionError } from "assert";
 import { create } from "domain";
 import { createHostRecordingSession, getSessionByUserIdDeviceId } from "./SessionDao";
-import { UserSession } from "../types/session/Session";
+import { UserSession } from "../types/session/session";
 import { transformSampleReply } from "@redis/time-series/dist/commands";
 
 dotenv.config();

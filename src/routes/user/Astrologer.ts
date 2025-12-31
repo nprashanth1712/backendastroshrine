@@ -14,7 +14,7 @@ import {
 import { UpdateHostProfileDataRequest, UpdateUserProfilePicRequest, UploadHostMediaRequest } from "../../types/user/Request";
 import { S3BucketKey, uploadHostmedia } from "../../services/host-services/HostMediaService";
 import getLogger from "../../services/Logger";
-import UserReviewRouter from "../reviews/ReviewRouter";
+import UserReviewRouter from "../Reviews/ReviewRouter";
 import { updateProfilePic } from "../../services/user/UserProfile";
 
 import AstrologerOrderRouter from "./AstrologerOrder";
@@ -26,7 +26,7 @@ import { astrologerPatchHandler, handleUpdateAstrologerHash } from "../../servic
 import { EndUser } from "../../types/user/models/User";
 import { logInformation } from "../../services/logging/CloudWatchService";
 import { homedir } from "node:os";
-import SettingsRouter from "../pages/UserSettings";
+import SettingsRouter from "../Pages/UserSettings";
 import { AstrologerRequest } from "../../types/astrologer/Request";
 import { generateAstrologerAboutMe } from "../../services/openai-service/ClientResponse";
 import { SearchService } from "../../services/search/SearchService";

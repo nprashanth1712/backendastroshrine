@@ -13,7 +13,7 @@ import {
     getUserSessionByUserIdDeviceId,
 } from "../data-access/SessionDao";
 import { nextUID } from "../data-access/UserDao";
-import { UserSession } from "../types/session/Session";
+import { UserSession } from "../types/session/session";
 
 const logger = getLogger();
 

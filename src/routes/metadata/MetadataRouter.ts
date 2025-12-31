@@ -7,6 +7,7 @@ import { MetaDataType } from "../../types/metadata/Metadata";
 import { invalidParameter, missingParameter } from "../../utils/ErrorUtils";
 import { AddMetaDataRequest } from "../../types/metadata/Request";
 import { ulid } from "ulid";
+import { uploadMetaDataMedia, addMetaData } from "../../data-access/MetadataDao";
 
 // Use Supabase DAO methods
 const getMetadataListByStatus = MetadataDao.getMetadataListByStatus.bind(MetadataDao);

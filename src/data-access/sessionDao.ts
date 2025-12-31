@@ -1,6 +1,6 @@
 import { DocumentClient } from "aws-sdk/clients/dynamodb";
 import { DynOutWithError } from "../types/Common";
-import { UserSession } from "../types/session/Session";
+import { UserSession } from "../types/session/session";
 import { nextUID } from "./UserDao";
 import { dynamoClient, USER_SESSION_TABLE } from "../constants/Config";
 import { RtcRole, RtcTokenBuilder } from "agora-token";

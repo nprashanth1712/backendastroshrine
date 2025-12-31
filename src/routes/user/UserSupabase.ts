@@ -73,26 +73,14 @@ const initializeUserSupabase = async (req: AuthRequest, res: Response, next: Nex
           error: "Missing email on authenticated user",
         });
       }
-      const createdUser = await UserDao.createUser({
+      const userName = name || email.split("@")[0];
+      const createdUser = await UserDao.addUser({
         id,
-        email,
-        username: name || email.split("@")[0],
-        role: "USER",
-      });
-      const createdUpdates: any = {};
-      if (typeof name === "string" && name.trim().length > 0) {
-        createdUpdates.username = name.trim();
-        createdUpdates.name = name.trim();
-      } else {
-        createdUpdates.username = createdUser.username;
-        createdUpdates.name = createdUser.username;
-      }
-      if (profile && typeof profile === "object") {
-        createdUpdates.profile = profile;
-      }
-
-      const updatedUser = await UserDao.updateUser(id, createdUpdates);
-      return res.status(200).json({ status: 200, data: updatedUser });
+        name: userName,
+        phoneNumber: "",
+        profile: profile && typeof profile === "object" ? profile : { email },
+      } as any);
+      return res.status(200).json({ status: 200, data: createdUser });
     }
   } catch (error: any) {
     logger.error("Error initializing user:", error);
