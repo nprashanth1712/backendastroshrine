@@ -55,6 +55,7 @@ interface EndUser {
   };
   languages?: string[];
   deviceToken?: string;
+  role?: string;
 }
 
 export class UserDao {
@@ -689,6 +690,13 @@ export class UserDao {
   private static mapToEndUser(data: any): EndUser {
     if (!data) return {} as EndUser;
 
+    // Determine role: if user has an astrologer record joined via the query, they're an ASTROLOGER
+    // The astrologer field comes from the join: astrologer:astrologers(*)
+    const hasAstrologerProfile = data.astrologer && 
+      typeof data.astrologer === 'object' && 
+      Object.keys(data.astrologer).length > 0;
+    const role = data.role || (hasAstrologerProfile ? 'ASTROLOGER' : 'USER');
+
     return {
       id: data.id,
       name: data.name,
@@ -707,6 +715,7 @@ export class UserDao {
       channelTimeSpent: data.channel_time_spent || { livestream: 0, chat: 0, call: 0 },
       languages: data.languages || [],
       deviceToken: data.device_token,
+      role: role,
     };
   }
 }
