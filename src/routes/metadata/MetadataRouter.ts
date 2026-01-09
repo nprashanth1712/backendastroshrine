@@ -20,17 +20,19 @@ router.use(express.json());
 const getMetadataListByStatusRouter = async (req: Request, res: Response, next: NextFunction) => {
 	try {
 		const metadataList = await getMetadataListByStatus({ status: "ACTIVE" });
-		for (const metadata of metadataList!) {
-			if (metadata?.content.imageUrl)
-				metadata.content.imageUrl =
-					process.env.AWS_S3_URL?.replace(
-						"{{}}",
-						process.env.AWS_S3_BUCKET_NAME_METADATA_PUBLIC!
-					) +
-					"/" +
-					metadata.content.imageUrl;
+		if (metadataList && Array.isArray(metadataList)) {
+			for (const metadata of metadataList) {
+				if (metadata?.content?.imageUrl)
+					metadata.content.imageUrl =
+						process.env.AWS_S3_URL?.replace(
+							"{{}}",
+							process.env.AWS_S3_BUCKET_NAME_METADATA_PUBLIC!
+						) +
+						"/" +
+						metadata.content.imageUrl;
+			}
 		}
-		return res.status(200).json(metadataList);
+		return res.status(200).json(metadataList || []);
 	} catch (error) {
 		next(error);
 	}
@@ -40,17 +42,19 @@ const getMetadataListByTypeRouter = async (req: Request, res: Response, next: Ne
 		const metadataType = req.params.type as MetaDataType;
 		const metadataList = await getMetadataListByTypeStatus({ metadataType: metadataType, status: "ACTIVE" });
 
-        for (const metadata of metadataList!) {
-			if (metadata?.content.imageUrl)
-				metadata.content.imageUrl =
-					process.env.AWS_S3_URL?.replace(
-						"{{}}",
-						process.env.AWS_S3_BUCKET_NAME_METADATA_PUBLIC!
-					) +
-					"/" +
-					metadata.content.imageUrl;
+		if (metadataList && Array.isArray(metadataList)) {
+			for (const metadata of metadataList) {
+				if (metadata?.content?.imageUrl)
+					metadata.content.imageUrl =
+						process.env.AWS_S3_URL?.replace(
+							"{{}}",
+							process.env.AWS_S3_BUCKET_NAME_METADATA_PUBLIC!
+						) +
+						"/" +
+						metadata.content.imageUrl;
+			}
 		}
-		res.status(200).json(metadataList);
+		res.status(200).json(metadataList || []);
 	} catch (error) {
 		logger.error(error);
 		next(error);

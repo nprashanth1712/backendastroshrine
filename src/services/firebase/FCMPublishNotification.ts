@@ -18,9 +18,13 @@ async function sendFcmNotification({
 	notificationData: NotificationData;
 	deviceList: DeviceList;
 }) {
-	let tokens = [];
-	for (const data of deviceList!) {
-		tokens.push(data.deviceId);
+	let tokens: string[] = [];
+	if (deviceList && Array.isArray(deviceList)) {
+		for (const data of deviceList) {
+			if (data?.deviceId) {
+				tokens.push(data.deviceId);
+			}
+		}
 	}
 
 	let notificationPayload;

@@ -30,8 +30,13 @@ const getAstrologerViewDataById = async (req: Request, res: Response, next: Next
 					channelTimeSpent: astroDetails.hostProfile?.channelTimeSpent,
 				});
 		} 
-		for (const media of astroDetails!.hostProfile?.media!) {
-			media.path = process.env.AWS_S3_URL?.replace("{{}}", process.env.AWS_S3_BUCKET_NAME_USER_PUBLIC!) + '/' + media.path;
+		// Safely iterate over media array if it exists
+		if (astroDetails?.hostProfile?.media && Array.isArray(astroDetails.hostProfile.media)) {
+			for (const media of astroDetails.hostProfile.media) {
+				if (media && media.path) {
+					media.path = process.env.AWS_S3_URL?.replace("{{}}", process.env.AWS_S3_BUCKET_NAME_USER_PUBLIC!) + '/' + media.path;
+				}
+			}
 		}
 
 		return res.status(200).json(astroDetails);

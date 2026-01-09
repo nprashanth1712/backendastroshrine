@@ -58,16 +58,19 @@ const uploadProfilePic = async (req: UpdateUserProfilePicRequest, res: Response,
 			});
 
 			// update the link for return
-			for (const metadata of avatarMetadataList!) {
-				if (metadata?.content.imageUrl)
-					metadata.content.imageUrl =
-						process.env.AWS_S3_URL?.replace(
-							"{{}}",
-							process.env.AWS_S3_BUCKET_NAME_METADATA_PUBLIC!
-						) +
-						"/" +
-						metadata.content.imageUrl;
+			if (avatarMetadataList && Array.isArray(avatarMetadataList)) {
+				for (const metadata of avatarMetadataList) {
+					if (metadata?.content?.imageUrl)
+						metadata.content.imageUrl =
+							process.env.AWS_S3_URL?.replace(
+								"{{}}",
+								process.env.AWS_S3_BUCKET_NAME_METADATA_PUBLIC!
+							) +
+							"/" +
+							metadata.content.imageUrl;
+				}
 			}
+			avatarMetadataList = avatarMetadataList || [];
 			let avatar = avatarMetadataList.filter(
 				(data) => data.metadataType === "avatar" && data.name === req.body.avatar
 			);
