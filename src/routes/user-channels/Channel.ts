@@ -217,7 +217,7 @@ async function enableHostChannelController(req: EnableChannel, res: EnableChanne
 			return;
 		}
 
-		if (!host?.uid) {
+		if (host?.uid === undefined || host?.uid === null) {
 			throw {statusCode: 400, code: "InvalidParameter", message: missingParameter("host.uid")};
 			return;
 		}

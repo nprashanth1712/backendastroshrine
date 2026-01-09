@@ -172,7 +172,7 @@ async function addChannelTempHostController(
 			throw {statusCode: 400, code: "InvalidParameter", message: missingParameter("id")};
 		}
 
-		if (!tempHost.uid) {
+		if (tempHost.uid === undefined || tempHost.uid === null) {
 			throw {statusCode: 400, code: "InvalidParameter", message: missingParameter("uid")};
 		}
 
