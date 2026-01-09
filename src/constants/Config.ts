@@ -76,8 +76,11 @@ export const EARNINGS_TABLE = "AstrologerEarnings";
 export const NOTIFICATONS_TABLE = "Notifications";
 export const AGENT_CHAT_TABLE = "CHATBOT_ASTROLOGER";
 
-export const ZOHO_MAIL_ADDRESS = "astrolive9@gmail.com";
-export const ZOHO_MAIL_PASS =  "HelloAstro@123";
-export const RAZORPAY_KEY_ID = "rzp_test_NS0WlFLQqV2nww";
-export const RAZORPAY_KEY_SECRET = "DZMxuHWCPfa4SNcAFvvs73dj";
+// Email configuration (move to env vars for security)
+export const ZOHO_MAIL_ADDRESS = process.env.ZOHO_MAIL_ADDRESS || "";
+export const ZOHO_MAIL_PASS = process.env.ZOHO_MAIL_PASS || "";
+
+// Razorpay configuration (move to env vars for security)
+export const RAZORPAY_KEY_ID = process.env.RAZORPAY_KEY_ID || "";
+export const RAZORPAY_KEY_SECRET = process.env.RAZORPAY_KEY_SECRET || "";
 
