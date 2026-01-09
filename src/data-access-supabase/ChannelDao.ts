@@ -1156,11 +1156,14 @@ export class ChannelDao {
    * Get or create recording session
    */
   private static async getOrCreateRecordingSession(channelId: string, deviceId: string): Promise<any> {
+    // Query by session_type and metadata instead of RECORDING_ prefix
+    // because user_id is UUID type and can't accept non-UUID strings
     const { data: existing, error: fetchError } = await supabaseAdmin
       .from('sessions')
       .select('*')
-      .eq('user_id', `RECORDING_${channelId}`)
+      .eq('session_type', 'RECORDING')
       .eq('device_id', deviceId)
+      .contains('metadata', { channelId: channelId })
       .single();
 
     if (fetchError && fetchError.code !== 'PGRST116') {
