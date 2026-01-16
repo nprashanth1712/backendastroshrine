@@ -8,7 +8,6 @@ COPY assets assets
 COPY process.yml process.yml
 COPY tsconfig.json tsconfig.json
 COPY swagger_output.json swagger_output.json
-COPY serviceAccKey.json serviceAccKey.json
 RUN npm run build
 
 # Production stage
@@ -20,9 +19,9 @@ COPY --from=builder build/package*.json .
 COPY --from=builder build/node_modules node_modules/
 COPY --from=builder build/dist dist/
 COPY --from=builder build/assets assets/
-COPY --from=builder build/serviceAccKey.json serviceAccKey.json
 
 # Environment variables will be set in Railway dashboard (not hardcoded here)
+# Firebase credentials should be set via FIREBASE_SERVICE_ACCOUNT env var
 ENV NODE_ENV=production
 ENV PORT=5050
 

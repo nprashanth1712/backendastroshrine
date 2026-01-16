@@ -3,8 +3,22 @@ import { DeviceList, NotificationData, NotificationViewData } from "../../types/
 import lodash from "lodash";
 import { updateNotificationsInUserTableHandler } from "../notifications/HandleFirebaseNotifications";
 
+// Initialize Firebase Admin SDK
+// In production (Railway), use FIREBASE_SERVICE_ACCOUNT env var
+// Locally, can use serviceAccKey.json file
+let firebaseCredential: admin.credential.Credential;
+
+if (process.env.FIREBASE_SERVICE_ACCOUNT) {
+	// Parse JSON from environment variable
+	const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
+	firebaseCredential = admin.credential.cert(serviceAccount);
+} else {
+	// Fallback to application default credentials (local dev with serviceAccKey.json)
+	firebaseCredential = admin.credential.applicationDefault();
+}
+
 admin.initializeApp({
-	credential: admin.credential.applicationDefault(),
+	credential: firebaseCredential,
 });
 
 async function sendFcmNotification({
