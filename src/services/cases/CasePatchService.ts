@@ -15,7 +15,7 @@ type HandlerFunction = ({
 }: {
     id: string;
     value: any
-}) => Promise<SupportCase>;
+}) => Promise<SupportCase | null>;
 
 
 // TODO NEEDS UPDATE WITH RECORD<T> VALUES 

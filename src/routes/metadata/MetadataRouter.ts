@@ -2,7 +2,8 @@ import express, { NextFunction, Request, Response } from "express";
 
 import getLogger from "../../services/Logger";
 // Supabase Migration: Using Supabase DAOs
-import { MetadataDao } from "../../data-access-supabase/MetadataDao";
+import { MetadataDao, addMetaData } from "../../data-access-supabase/MetadataDao";
+import { uploadMetaDataMedia } from "../../data-access/MetadataDao";
 import { MetaDataType } from "../../types/metadata/Metadata";
 import { invalidParameter, missingParameter } from "../../utils/ErrorUtils";
 import { AddMetaDataRequest } from "../../types/metadata/Request";

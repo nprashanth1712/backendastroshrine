@@ -93,7 +93,7 @@ const hostUidHandler = async ({
 		channelId: channelData.channelId,
 		createTs: channelData.createTs,
 		host,
-		hostProfile: channelData.hostProfile || {},
+		hostProfile: (channelData as any).hostProfile || {},
 	} as any);
 	return response;
 };

@@ -8,7 +8,7 @@ import { NextFunction, Request, Response } from "express";
 import userRouter from "./routes/user/User";
 import channelRouter from "./routes/ChannelRouter";
 import livestreamRouter from "./routes/user-channels/Channel";
-import agoraTokenRouter from "./routes/AgoraToken";
+import agoraTokenRouter from "./routes/agoraToken";
 import chatRouter from "./routes/chat/Chat";
 import handleError from "./constants/error/ErrorHandler";
 import contentRouter from "./routes/ContentTemplate";

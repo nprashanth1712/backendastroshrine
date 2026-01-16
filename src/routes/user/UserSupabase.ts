@@ -76,10 +76,11 @@ const initializeUserSupabase = async (req: AuthRequest, res: Response, next: Nex
           error: "Missing email on authenticated user",
         });
       }
+      const defaultUsername = name || email.split("@")[0];
       const createdUser = await UserDao.createUser({
         id,
         email,
-        username: name || email.split("@")[0],
+        username: defaultUsername,
         role: "USER",
       });
       const createdUpdates: any = {};
@@ -87,8 +88,9 @@ const initializeUserSupabase = async (req: AuthRequest, res: Response, next: Nex
         createdUpdates.username = name.trim();
         createdUpdates.name = name.trim();
       } else {
-        createdUpdates.username = createdUser.username;
-        createdUpdates.name = createdUser.username;
+        // Use the default username we passed to createUser
+        createdUpdates.username = defaultUsername;
+        createdUpdates.name = defaultUsername;
       }
       if (profile && typeof profile === "object") {
         createdUpdates.profile = profile;

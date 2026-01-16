@@ -44,7 +44,7 @@ const getTemplateDataById = async({id}: {id: string}) : Promise<ContentTemplateI
     };
     const resp: DynOutWithError<DocumentClient.GetItemOutput> =
         await dynamoClient.get(params).promise();
-    return (await resp.Item)  as ContentTemplateInput|| {};
+    return ((await resp.Item) || {}) as ContentTemplateInput;
 }
 
 
