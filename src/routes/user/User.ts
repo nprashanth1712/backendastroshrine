@@ -18,7 +18,7 @@ import getLogger from "../../services/Logger";
 import { userPatchHandler } from "../../services/user/UserDetails";
 import { missingParameter } from "../../utils/ErrorUtils";
 import { initializeSettingsPage } from "../../data-access/PagesDao";
-import SettingsRouter from "../pages/UserSettings";
+import SettingsRouter from "../Pages/UserSettings";
 
 import sessionRouter from "../SessionRouter";
 

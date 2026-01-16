@@ -2,11 +2,11 @@ import express, { Request, Response, NextFunction } from "express";
 import { getAstrologerViewData } from "../../data-access/AstrologerViewDao";
 import getLogger from "../../services/Logger";
 import SearchRouter from "../search/SearchRouter";
-import SettingsRouter from "../pages/UserSettings";
+import SettingsRouter from "../Pages/UserSettings";
 import { updateAstrologerDataHash } from "../../data-access/AstrologerDao";
 import { handleUpdateAstrologerHash } from "../../services/astrologer/AstrologerDetails";
 import { AstrologerViewCache } from "../../types/astrologer/Astrologer";
-import UserReviewRouter from "../reviews/ReviewRouter";
+import UserReviewRouter from "../Reviews/ReviewRouter";
 
 const logger = getLogger();
 const router = express.Router({ mergeParams: true });

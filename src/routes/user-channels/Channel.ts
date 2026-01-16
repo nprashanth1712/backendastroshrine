@@ -2,7 +2,7 @@ import express, { NextFunction, Request, Response } from "express";
 
 import ChannelWaitlistRouter from "./ChannelWaitlistRouter";
 import ChannelTempHostRouter from "./ChannelTempHostRouter";
-import ChannelHostRouter from "./ChannelHostRouter";
+import ChannelHostRouter from "./channelHostRouter";
 import { invalidParameter, missingParameter } from "../../utils/ErrorUtils";
 import { toString } from "../../utils/StringUtils";
 import { publishMessage, publishPushNotification } from "../../services/Pusher";
