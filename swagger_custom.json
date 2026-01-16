@@ -1,0 +1,356 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "version": "1.0.0",
+      "title": "REST API",
+      "description": ""
+    },
+    "host": "localhost:3000",
+    "servers": [
+      {
+        "url": "",
+        "description": ""
+      }
+    ],
+    "basePath": "/",
+    "tags": [
+      {
+        "name": "",
+        "description": ""
+      }
+    ],
+    "schemes": [
+      "http"
+    ],
+    "paths": {
+      "/v1/livestream": {
+        "get": {
+          "tags": ["Livestream"],
+          "description": "",
+          "parameters": [
+            {
+              "name": "users",
+              "in": "query",
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK"
+            },
+            "400": {
+              "description": "Bad Request"
+            }
+          }
+        },
+        "post": {
+          "tags": ["Livestream"],
+          "description": "",
+          "parameters": [
+            {
+              "name": "body",
+              "in": "body",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "example": "any"
+                  },
+                  "last_received": {
+                    "example": "any"
+                  },
+                  "ts": {
+                    "example": "any"
+                  },
+                  "message": {
+                    "example": "any"
+                  },
+                  "type": {
+                    "example": "any"
+                  }
+                }
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK"
+            },
+            "201": {
+              "description": "Created"
+            },
+            "400": {
+              "description": "Bad Request"
+            },
+            "501": {
+              "description": "Not Implemented"
+            }
+          }
+        },
+        "patch": {
+          "tags": ["Livestream"],
+          "description": "",
+          "parameters": [
+            {
+              "name": "body",
+              "in": "body",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "op": {
+                    "example": "any"
+                  },
+                  "path": {
+                    "example": "any"
+                  }
+                }
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK"
+            },
+            "400": {
+              "description": "Bad Request"
+            }
+          }
+        }
+      },
+      "/v1/livestream/{channel_id}": {
+        "get": {
+          "tags": ["Livestream"],
+          "description": "",
+          "parameters": [
+            {
+              "name": "channel_id",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK"
+            }
+          }
+        },
+        "delete": {
+          "tags": ["Livestream"],
+          "description": "",
+          "parameters": [
+            {
+              "name": "channel_id",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK"
+            },
+            "400": {
+              "description": "Bad Request"
+            }
+          }
+        }
+      },
+      "/v1/livestream/{channel_id}/waitlist/": {
+        "get": {
+          "tags": ["Livestream"],
+          "description": "",
+          "parameters": [
+            {
+              "name": "channel_id",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK"
+            }
+          }
+        },
+        "post": {
+          "tags": ["Livestream"],
+          "description": "",
+          "parameters": [
+            {
+              "name": "channel_id",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "body",
+              "in": "body",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "example": "any"
+                  },
+                  "uid": {
+                    "example": "any"
+                  },
+                  "name": {
+                    "example": "any"
+                  }
+                }
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK"
+            },
+            "400": {
+              "description": "Bad Request"
+            },
+            "501": {
+              "description": "Not Implemented"
+            }
+          }
+        }
+      },
+      "/v1/livestream/{channel_id}/waitlist/{waitlist_id}": {
+        "delete": {
+          "tags": ["Livestream"],
+          "description": "",
+          "parameters": [
+            {
+              "name": "channel_id",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "waitlist_id",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK"
+            }
+          }
+        }
+      },
+      "v1/livestream/{channel_id}/temp-host/": {
+        "get": {
+          "tags": ["Livestream"],
+          "description": "",
+          "parameters": [
+            {
+              "name": "channel_id",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK"
+            }
+          }
+        },
+        "post": {
+          "tags": ["Livestream"],
+          "description": "",
+          "parameters": [
+            {
+              "name": "channel_id",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "body",
+              "in": "body",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "example": "any"
+                  },
+                  "uid": {
+                    "example": "any"
+                  },
+                  "name": {
+                    "example": "any"
+                  }
+                }
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK"
+            },
+            "400": {
+              "description": "Bad Request"
+            }
+          }
+        },
+        "patch": {
+          "tags": ["Livestream"],
+          "description": "",
+          "parameters": [
+            {
+              "name": "channel_id",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "body",
+              "in": "body",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "op": {
+                    "example": "any"
+                  },
+                  "path": {
+                    "example": "any"
+                  }
+                }
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK"
+            },
+            "400": {
+              "description": "Bad Request"
+            }
+          }
+        }
+      },
+      "/{waitlist_id}": {
+        "tags": ["Livestream"],
+        "delete": {
+          "description": "",
+          "parameters": [
+            {
+              "name": "waitlist_id",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK"
+            }
+          }
+        }
+      }
+    }
+}

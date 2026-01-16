@@ -1,0 +1,176 @@
+title Sequeantial Diagram AstroShrine App
+
+actor User
+actor Astrologer #red
+participant App
+participant Pusher
+participant Backend
+participant Twilio
+
+
+
+entryspacing 0.9
+
+group #grey Signup/SignIn Flow - USER #white
+User->App:Initialize
+
+group #green LOOP until VerificationStatus != Accepted || MaxTries > CurrentTries] #white
+App->Backend:initiateOTPVerification{phone_number}
+
+  Backend->Twilio:startVerification{phone_number}
+  Twilio-->Backend:{serviceID, accountID, channel,  status}
+ 
+
+group #green Signup/SignIn Flow - USER #white [Verify if status ok]
+Backend->Twilio:checkVerificationCode{phone_number}
+Twilio-->Backend:{..., status}
+ Backend-->App:{verificationResponse: {..., status}, user: {id, uid, name, phone_number, role}}}
+
+group #Blue if user exists #white []
+App->App:Store in AsyncStorage {key: user_data, value: user} \n ! AppInitialize !
+end
+
+group #Blue if user doesn't exist #white []
+App->Backend: POST: v1/user: {phone_number, name]
+Backend-->App: user = {id, uid, name, phone_number, role...}
+group #Blue Store userData in AsyncStorage #white []
+App->App:Store in AsyncStorage {key: user_data, value: user} \n ! AppInitialize !
+
+
+end
+
+end
+end
+end
+end
+
+
+group #orange Signup/SignIn Flow - ASTROLOGER #white
+Astrologer->App:Initialize
+
+group #yellow LOOP until VerificationStatus != Accepted || MaxTries > CurrentTries] #black
+App->Backend:initiateOTPVerification{phone_number}
+
+  Backend->Twilio:startVerification{phone_number}
+  Twilio-->Backend:{serviceID, accountID, channel,  status}
+ 
+
+group #orange Verify If status OK #black
+Backend->Twilio:checkVerificationCode{phone_number}
+Twilio-->Backend:{..., status}
+ Backend-->App:{verificationResponse: {..., status}, user: {id, uid, name, phone_number, role}}}
+
+group #yellow if user exists #black []
+App->App:Store in AsyncStorage {key: user_data, value: user} \n ! AppInitialize !
+end
+
+group #yellow if user doesn't exist #black []
+App->Backend: POST: v1/user: {phone_number, name]
+Backend-->App: user = {id, uid, name, phone_number, role...}
+group #yellow Store userData in AsyncStorage #black []
+
+App->App:Store in AsyncStorage {key: user_data, value: user} \n ! AppInitialize !
+
+
+end
+
+end
+end
+end
+Backend->App:ADMIN ROLE CHANGE ViA CONSOLE\n{role: "ASTROLOGER"} 
+end
+
+
+
+
+
+
+group #orange INTERACTING WITH THE LIVE STREAM#black []
+Astrologer->App:Astrologer starts a livestream
+App->Backend:POST: v1/livestream: {channel_id = astrologer.id, host: astrologer}
+  group #red If livestream already exists for a channel_id #white []
+
+
+  Backend->Backend:stopLivestream{channel_id, create_ts, status: "TERMINATED_BY_SYSTEM"}
+    Backend->Pusher:publishMessage{uri, action: 'DELETE', message: 'LIVESTREAM ENDED"}
+    Pusher->App:Pusher Message {message}
+  end
+  Backend->Pusher:pushPublicNotification{channel_id, host: astrologer, channel_status: "ACTIVE"}
+  Pusher->User:Push Notification "Livestream started @channel_id.name"
+  
+  Backend-->App: {channel_id, host: astrologer, channel_status: "ACTIVE", waitlist: [], temp_host: {}} \n!! Live Stream Started !! 
+ 
+ User->App:User Fetches all the livestreams
+ App->Backend: Get all Active Livestreams\n     GET v1/livestream
+Backend-->App: [{channel_id, status: "ACTIVE}]
+
+ User->App:User joins a livestream
+App->Backend: :     Get the selected livestream data\nGET: v1/livestream/@channel_id
+App->Pusher:Subscribe To Pusher \n{"v1_livestream@channel_id}\n{"v1_livestream@channel_id_waitlist}\n{"v1_livestream@channel_id_temp_host}
+Backend-->App:{channel_id, status: "ACTIVE", waitlist: [], temp_host: {}}
+
+
+ 
+ 
+
+Astrologer->App: Terminate Livestream
+App->Backend: DELETE v1/livestream/@channel_id
+Backend->Pusher:pushPublicNotification{channel_id, host: astrologer, channel_status: "ACTIVE"}
+  Pusher->User:Push Notification "Livestream started @channel_id.name"
+Backend-->App:{channel_id, channel_status: "TERMINATED_BY_ASTROLOGER", user, waitlist[], temp_host{}}
+end
+
+group #brown INTERACTING WITH WAITLIST AND TEMPHOST #white
+User->App:User Joins a Livestream Channel's Waitlist
+App->Backend: Join the waitlist\n.POST v1/livestream/@channel_id/waitlist/: {host: user, status...}
+
+Backend->Pusher:publishMessage{uri, action: "UPDATE", message: waitlist[]}
+Pusher->App:Pusher Message {message}
+Backend-->App:{channel_id, status: "ACTIVE", waitlist: [user,], temp_host: {}}
+
+ Astrologer->App: Astrologer Gets Waitlist
+ 
+ App->Backend:GET: v1/livestream/@channel_id/waitlist/
+ Backend-->App:{channel_id, channel_status: "ACTIVE", waitlist[], temp_host{}} 
+  Astrologer->App: Astrologer Gets TempHost
+ App->Backend:GET: v1/livestream/@channel_id/temp-host
+ Backend-->App:{channel_id, channel_status: "ACTIVE", waitlist[], temp_host{}}
+  Astrologer->App:Astrologer Accept User to from Waitlist to TempHost 
+
+  group #red If temp_host is empty #white []
+  App->Backend:POST: v1/livestream/@channel_id/temp-host: { user: {id, uid...}, status}
+  end
+    group #blue If temp_host
+    is not empty #white []
+
+ App->Backend:PATCH: v1/livestream/@channel_id/temp-host: { user, op: "REPLACE", value: status}
+  group #red If status = "TERMINATED_BY_..." #white []
+  Backend-->Backend:callTerminateHandler{status = "TERMINATED_BY_..."}
+  end
+   group #red If status = "REJECTED" #white []
+  Backend-->Backend:callRejectedHandler{status = "REJECTED"}
+  end
+  end
+   group #green If status = "ACCEPTED" OR temp_host empty #white []
+  Backend-->Backend:callAcceptedHandler{status = "REJECTED"}
+  Backend->App:{channel_id, host: astrologer, channel_status: "ACTIVE", waitlist[], temp_host: {user}}\n!! Temp Host Joined !!
+  end
+User->App:User Leaves Waitlist
+App->Backend:DELETE v1/livestream/@channel_id/waitlist/@waitlist_id: {waitlist_id = user_id}
+Backend->Pusher:publishMessage{uri, action: "UPDATE", message: waitlist[]}
+Pusher->App:Pusher Message {message}
+Backend-->App:{channel_id, status: "ACTIVE", waitlist[], temp_host{}}
+Astrologer->App: Astrologer Terminate Livestream
+
+Backend-->App:{channel_id, channel_status: "TERMINATED_BY_ASTROLOGER", user, waitlist[], temp_host{}}
+Backend->Pusher:publishMessage{uri, action: "DELETE", message: Livestream ended}
+Pusher->App:Pusher Message {message}
+App->User:Pusher message{Livestream ended}
+Backend-->App:{channel_id, status: "ACTIVE", waitlist[], temp_host{}}
+end
+
+end
+end
+
+
+

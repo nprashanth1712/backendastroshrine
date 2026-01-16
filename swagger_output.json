@@ -1,0 +1,5488 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "REST API",
+    "description": ""
+  },
+  "host": "localhost:5050",
+  "servers": [
+    {
+      "url": "",
+      "description": ""
+    }
+  ],
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "",
+      "description": ""
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/virgo.jpg": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/billa": {
+      "get": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/health-check": {
+      "get": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/": {
+      "get": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/v1/user/": {
+      "get": {
+        "tags": [
+          "User Control"
+        ],
+        "summary": "Get list of all users in database",
+        "description": "",
+        "parameters": [
+          {
+            "name": "phoneNumber",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "isSupport",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "list of user",
+            "in": "body",
+            "type": "array",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "balance": {
+                    "type": "number",
+                    "example": 0
+                  },
+                  "role": {
+                    "type": "string",
+                    "example": "USER"
+                  },
+                  "phoneNumber": {
+                    "type": "string",
+                    "example": "+911234567891"
+                  },
+                  "id": {
+                    "type": "string",
+                    "example": "userid2"
+                  },
+                  "uid": {
+                    "type": "number",
+                    "example": 62
+                  },
+                  "name": {
+                    "type": "string",
+                    "example": "Dohn Joe"
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/user/{id}": {
+      "put": {
+        "tags": [
+          "User Control"
+        ],
+        "summary": "Initialize a user",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Initialize a user to the database with the users information.",
+            "schema": {
+              "required": [
+                "name"
+              ],
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "name of the user"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Details of the new initialized user",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "username"
+                },
+                "phoneNumber": {
+                  "type": "string",
+                  "example": "+919999999999"
+                },
+                "role": {
+                  "type": "string",
+                  "example": "ASTROLOGER"
+                },
+                "id": {
+                  "type": "string",
+                  "example": "userid"
+                },
+                "uid": {
+                  "type": "number",
+                  "example": 69
+                },
+                "balance": {
+                  "type": "number",
+                  "example": 0
+                },
+                "callStatus": {
+                  "type": "string",
+                  "example": "online"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "User Control"
+        ],
+        "summary": "Delete a user from database",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "User Control"
+        ],
+        "summary": "Retrieve a user",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Details of the user",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "username"
+                },
+                "phoneNumber": {
+                  "type": "string",
+                  "example": "+919999999999"
+                },
+                "role": {
+                  "type": "string",
+                  "example": "ASTROLOGER"
+                },
+                "id": {
+                  "type": "string",
+                  "example": "userid"
+                },
+                "uid": {
+                  "type": "number",
+                  "example": 69
+                },
+                "balance": {
+                  "type": "number",
+                  "example": 0
+                },
+                "callStatus": {
+                  "type": "string",
+                  "example": "online"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "User Control"
+        ],
+        "summary": "Update users call status",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Update users call status if ONLIVESTREAM / ONCALL / ONCHAT or ONLINE.",
+            "schema": {
+              "required": [
+                "op",
+                "path",
+                "value"
+              ],
+              "properties": {
+                "name": {
+                  "op": "string",
+                  "description": "operation -> REPLACE"
+                },
+                "path": {
+                  "type": "string",
+                  "description": "path of the value to change ie status"
+                },
+                "value": {
+                  "type": "string",
+                  "description": "the new status ie ONLINE"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "201": {
+            "description": "Details of the user",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "username"
+                },
+                "phoneNumber": {
+                  "type": "string",
+                  "example": "+919999999999"
+                },
+                "role": {
+                  "type": "string",
+                  "example": "ASTROLOGER"
+                },
+                "id": {
+                  "type": "string",
+                  "example": "userid"
+                },
+                "uid": {
+                  "type": "number",
+                  "example": 69
+                },
+                "balance": {
+                  "type": "number",
+                  "example": 0
+                },
+                "callStatus": {
+                  "type": "string",
+                  "example": "online"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/user/bulk": {
+      "post": {
+        "tags": [
+          "User Control"
+        ],
+        "summary": "Signup/Add a new user",
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Add a new user to the database with the users information.",
+            "schema": {
+              "required": [
+                "name",
+                "phoneNumber",
+                "role"
+              ],
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "name of the user"
+                },
+                "phoneNumber": {
+                  "type": "number",
+                  "description": "Phone number of the user"
+                },
+                "role": {
+                  "type": "string",
+                  "description": "Role of the user - { ASTROLOGER or USER } "
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Details of the new initialized user",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "username"
+                },
+                "phoneNumber": {
+                  "type": "string",
+                  "example": "+919999999999"
+                },
+                "role": {
+                  "type": "string",
+                  "example": "ASTROLOGER"
+                },
+                "id": {
+                  "type": "string",
+                  "example": "userid"
+                },
+                "uid": {
+                  "type": "number",
+                  "example": 69
+                },
+                "balance": {
+                  "type": "number",
+                  "example": 0
+                },
+                "callStatus": {
+                  "type": "string",
+                  "example": "online"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/user/{id}/settings/": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "patch": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "op": {
+                  "example": "any"
+                },
+                "path": {
+                  "example": "any"
+                },
+                "value": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/v1/user/{id}/order/": {
+      "get": {
+        "tags": [
+          "User Order Control"
+        ],
+        "summary": "Retrieve a users order information by timestamp",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "startTs",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "starting ts to get order from"
+          },
+          {
+            "name": "endTs",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "end timestamp till where to get order"
+          },
+          {
+            "name": "key",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "the key from which to get the left orders from, used for pagination"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Details of the user order",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "ts": {
+                    "type": "number",
+                    "example": 1733301543243
+                  },
+                  "hostId": {
+                    "type": "string",
+                    "example": "01J6VDPDEGZN7DED7TAWFQ3NWK"
+                  },
+                  "orderType": {
+                    "type": "string",
+                    "example": "CONSULTATION"
+                  },
+                  "hostIdTs": {
+                    "type": "string",
+                    "example": "01J6VDPDEGZN7DED7TAWFQ3NWK#1733301543243"
+                  },
+                  "userId": {
+                    "type": "string",
+                    "example": "01JDVMQ65RZWCR4ZWCFTT46VWC"
+                  },
+                  "subOrderType": {
+                    "type": "string",
+                    "example": "livestream"
+                  },
+                  "status": {
+                    "type": "string",
+                    "example": "Initialized"
+                  },
+                  "amount": {
+                    "type": "number",
+                    "example": 400
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/user/{id}/order/host/{hostId}": {
+      "get": {
+        "tags": [
+          "User Order Control"
+        ],
+        "summary": "Retrieve a users order information by a host by timestamp",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "hostId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "id of the host"
+          },
+          {
+            "name": "startTs",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "starting ts to get order from"
+          },
+          {
+            "name": "endTs",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "end timestamp till where to get order"
+          },
+          {
+            "name": "key",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "the key from which to get the left orders from, used for pagination"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Details of the user order",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "ts": {
+                    "type": "number",
+                    "example": 1733301543243
+                  },
+                  "hostId": {
+                    "type": "string",
+                    "example": "01J6VDPDEGZN7DED7TAWFQ3NWK"
+                  },
+                  "orderType": {
+                    "type": "string",
+                    "example": "CONSULTATION"
+                  },
+                  "hostIdTs": {
+                    "type": "string",
+                    "example": "01J6VDPDEGZN7DED7TAWFQ3NWK#1733301543243"
+                  },
+                  "userId": {
+                    "type": "string",
+                    "example": "01JDVMQ65RZWCR4ZWCFTT46VWC"
+                  },
+                  "subOrderType": {
+                    "type": "string",
+                    "example": "livestream"
+                  },
+                  "status": {
+                    "type": "string",
+                    "example": "Initialized"
+                  },
+                  "amount": {
+                    "type": "number",
+                    "example": 400
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/user/{id}/order/{hostId}": {
+      "post": {
+        "tags": [
+          "User Order Control"
+        ],
+        "summary": "ONLY FOR TESTING PURPOSE, initialize a new order",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "id of the user"
+          },
+          {
+            "name": "hostId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "id of the host"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Add a new order to the database for the user.",
+            "schema": {
+              "required": [
+                "orderType",
+                "subOrderType"
+              ],
+              "properties": {
+                "orderType": {
+                  "type": "string",
+                  "description": "orders type"
+                },
+                "subOrderType": {
+                  "type": "string",
+                  "description": "orders sub type"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/v1/user/{id}/order/{timestamp}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "timestamp",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "patch": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "timestamp",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "op": {
+                  "example": "any"
+                },
+                "path": {
+                  "example": "any"
+                },
+                "value": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/v1/user/{id}/notification/": {
+      "patch": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "op": {
+                  "example": "any"
+                },
+                "path": {
+                  "example": "any"
+                },
+                "value": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/v1/user/{id}/notification/type/{type}/{notificationId}": {
+      "patch": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "type",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "notificationId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "op": {
+                  "example": "any"
+                },
+                "path": {
+                  "example": "any"
+                },
+                "value": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/v1/user/{id}/profile/profile-pic": {
+      "post": {
+        "tags": [
+          "User Profile Control"
+        ],
+        "summary": "Upload users profile pic",
+        "description": "",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "id of the user"
+          },
+          {
+            "name": "file",
+            "in": "formData",
+            "type": "file",
+            "required": true,
+            "description": "profile pic"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "avatar": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/v1/user/{id}/profile/profile-data": {
+      "post": {
+        "tags": [
+          "User Profile Control"
+        ],
+        "summary": "Update users profile",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "id of the user"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Update profile information.",
+            "schema": {
+              "required": [
+                "name",
+                "profile"
+              ],
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "name of the user"
+                },
+                "profile": {
+                  "type": "object",
+                  "properties": {
+                    "dateTimeOfBirth": {
+                      "type": "number",
+                      "description": "date of time of the user"
+                    },
+                    "placeOfBirth": {
+                      "type": "string",
+                      "description": "place of birth of the user"
+                    },
+                    "email": {
+                      "type": "string",
+                      "description": "email of the user"
+                    },
+                    "gender": {
+                      "type": "string",
+                      "description": "gender of the user"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "201": {
+            "description": "Details of the user",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "username"
+                },
+                "phoneNumber": {
+                  "type": "string",
+                  "example": "+919999999999"
+                },
+                "role": {
+                  "type": "string",
+                  "example": "ASTROLOGER"
+                },
+                "id": {
+                  "type": "string",
+                  "example": "userid"
+                },
+                "uid": {
+                  "type": "number",
+                  "example": 69
+                },
+                "balance": {
+                  "type": "number",
+                  "example": 0
+                },
+                "callStatus": {
+                  "type": "string",
+                  "example": "online"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/user/{id}/kundli/": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "gender": {
+                  "example": "any"
+                },
+                "placeOfBirth": {
+                  "example": "any"
+                },
+                "dateTimeOfBirth": {
+                  "example": "any"
+                },
+                "name": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/v1/user/{id}/kundli/{createTs}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "createTs",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "patch": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "createTs",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "op": {
+                  "example": "any"
+                },
+                "path": {
+                  "example": "any"
+                },
+                "value": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/v1/user/{id}/session/user/{id}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "role": {
+                  "example": "any"
+                },
+                "expiry": {
+                  "example": "any"
+                },
+                "tokentype": {
+                  "example": "any"
+                },
+                "deviceId": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/v1/user/{id}/session/user/{id}/{deviceId}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deviceId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/v1/user-supabase/{id}": {
+      "put": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "example": "any"
+                },
+                "profile": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/v1/user-supabase/{id}/profile/profile-data": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "example": "any"
+                },
+                "profile": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/v1/msg-channel/pusher/auth": {
+      "post": {
+        "tags": [
+          "Pusher Control"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "socket_id": {
+                  "example": "any"
+                },
+                "channel_name": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Pusher Control"
+        ],
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/v1/msg-channel/pusher/subscribe": {
+      "post": {
+        "tags": [
+          "Pusher Control"
+        ],
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/v1/channel/{channelType?}": {
+      "get": {
+        "tags": [
+          "Channel"
+        ],
+        "summary": "Get list of all active channels",
+        "description": "",
+        "parameters": [
+          {
+            "name": "channelType?",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of all the active channels and their details.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "createTs": {
+                    "type": "number",
+                    "example": 1711790359043
+                  },
+                  "channelStatus": {
+                    "type": "string",
+                    "example": "ACTIVE"
+                  },
+                  "channelId": {
+                    "type": "string",
+                    "example": "01HPKHMV21AYACVMEBFNZ406Q3"
+                  },
+                  "host": {
+                    "type": "object",
+                    "properties": {
+                      "uid": {
+                        "type": "number",
+                        "example": 63
+                      },
+                      "role": {
+                        "type": "string",
+                        "example": "USER"
+                      },
+                      "balance": {
+                        "type": "number",
+                        "example": 0
+                      },
+                      "name": {
+                        "type": "string",
+                        "example": "Vaibhav"
+                      },
+                      "phoneNumber": {
+                        "type": "string",
+                        "example": "+917722846537"
+                      },
+                      "id": {
+                        "type": "string",
+                        "example": "01HPKHMV21AYACVMEBFNZ406Q3"
+                      }
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/channel/{channelType}": {
+      "post": {
+        "tags": [
+          "Channel"
+        ],
+        "summary": "Start a new channel with particular channelType",
+        "description": "",
+        "parameters": [
+          {
+            "name": "channelType",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Initialize channel with: \n   channelId = hostId\n - host   = details of host starting the channel\n - if any channel exists\n - delete the current channel and initialize a new",
+            "schema": {
+              "required": [
+                "channelId",
+                "host"
+              ],
+              "properties": {
+                "channelId": {
+                  "type": "string",
+                  "description": "identifier to uniquely determine single livestream"
+                },
+                "host": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "description": "identifier of the host"
+                    },
+                    "uid": {
+                      "type": "number",
+                      "description": "identifier of the host for agora"
+                    },
+                    "name": {
+                      "type": "string",
+                      "description": "name of the host"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Details of the newly created channel.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "createTs": {
+                  "type": "number",
+                  "example": 1711790359043
+                },
+                "channelStatus": {
+                  "type": "string",
+                  "example": "ACTIVE"
+                },
+                "channelId": {
+                  "type": "string",
+                  "example": "01HPKHMV21AYACVMEBFNZ406Q3"
+                },
+                "host": {
+                  "type": "object",
+                  "properties": {
+                    "uid": {
+                      "type": "number",
+                      "example": 63
+                    },
+                    "role": {
+                      "type": "string",
+                      "example": "USER"
+                    },
+                    "balance": {
+                      "type": "number",
+                      "example": 0
+                    },
+                    "name": {
+                      "type": "string",
+                      "example": "Vaibhav"
+                    },
+                    "phoneNumber": {
+                      "type": "string",
+                      "example": "+917722846537"
+                    },
+                    "id": {
+                      "type": "string",
+                      "example": "01HPKHMV21AYACVMEBFNZ406Q3"
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/channel/{channelType}/{channelId}": {
+      "get": {
+        "tags": [
+          "Channel"
+        ],
+        "summary": "Get latest active users channel",
+        "description": "",
+        "parameters": [
+          {
+            "name": "channelType",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "channelId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "channelId of channel"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Details of the livestream with channelId = params.channelId.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "createTs": {
+                  "type": "number",
+                  "example": 1711790359043
+                },
+                "channelStatus": {
+                  "type": "string",
+                  "example": "ACTIVE"
+                },
+                "channelId": {
+                  "type": "string",
+                  "example": "01HPKHMV21AYACVMEBFNZ406Q3"
+                },
+                "host": {
+                  "type": "object",
+                  "properties": {
+                    "uid": {
+                      "type": "number",
+                      "example": 63
+                    },
+                    "role": {
+                      "type": "string",
+                      "example": "USER"
+                    },
+                    "balance": {
+                      "type": "number",
+                      "example": 0
+                    },
+                    "name": {
+                      "type": "string",
+                      "example": "Vaibhav"
+                    },
+                    "phoneNumber": {
+                      "type": "string",
+                      "example": "+917722846537"
+                    },
+                    "id": {
+                      "type": "string",
+                      "example": "01HPKHMV21AYACVMEBFNZ406Q3"
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Channel"
+        ],
+        "summary": "Update a channel type status ",
+        "description": "",
+        "parameters": [
+          {
+            "name": "channelType",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Type of the channel"
+          },
+          {
+            "name": "channelId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "channelId of channel"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Update using path as status",
+            "schema": {
+              "required": [
+                "op",
+                "path",
+                "value"
+              ],
+              "properties": {
+                "op": {
+                  "type": "string",
+                  "description": "operation in the patch ie REPLACE"
+                },
+                "path": {
+                  "type": "string",
+                  "description": "path ie status"
+                },
+                "value": {
+                  "type": "string",
+                  "description": "value for status"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Channel"
+        ],
+        "summary": "Stop an active channel",
+        "description": "",
+        "parameters": [
+          {
+            "name": "channelType",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "channelId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "channelId of channel"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Details of the channel thats stopped.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "createTs": {
+                  "type": "number",
+                  "example": 1711790359043
+                },
+                "channelStatus": {
+                  "type": "string",
+                  "example": "TERMINATED_BY_USER"
+                },
+                "channelId": {
+                  "type": "string",
+                  "example": "01HPKHMV21AYACVMEBFNZ406Q3"
+                },
+                "host": {
+                  "type": "object",
+                  "properties": {
+                    "uid": {
+                      "type": "number",
+                      "example": 63
+                    },
+                    "role": {
+                      "type": "string",
+                      "example": "USER"
+                    },
+                    "balance": {
+                      "type": "number",
+                      "example": 0
+                    },
+                    "name": {
+                      "type": "string",
+                      "example": "Vaibhav"
+                    },
+                    "phoneNumber": {
+                      "type": "string",
+                      "example": "+917722846537"
+                    },
+                    "id": {
+                      "type": "string",
+                      "example": "01HPKHMV21AYACVMEBFNZ406Q3"
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "/v1/channel/{channelType}/{channelId}/event": {
+      "post": {
+        "tags": [
+          "Channel"
+        ],
+        "summary": "Send an event to a channel/livestream joined -> Gift or Message",
+        "description": "",
+        "parameters": [
+          {
+            "name": "channelType",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "channelId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Send only message if sending a message or send giftId if sending a gift",
+            "schema": {
+              "required": [
+                "userId"
+              ],
+              "properties": {
+                "userId": {
+                  "type": "string",
+                  "description": "Identifier of the user sending the event"
+                },
+                "giftId": {
+                  "type": "string",
+                  "description": "identifier of the gift"
+                },
+                "message": {
+                  "type": "string",
+                  "description": "The message to send to the livestream"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success response.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "event": {
+                  "type": "string",
+                  "example": "MessageOrGiftData"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/v1/channel/{channelType}/{channelId}/waitlist/": {
+      "get": {
+        "tags": [
+          "Channel"
+        ],
+        "summary": "Get waitlist of a channel",
+        "description": "",
+        "parameters": [
+          {
+            "name": "channelType",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "channelId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "channelId of channel"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Waitlist of the channel with channelId = params.channelId.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "uid": {
+                    "type": "number",
+                    "example": 63
+                  },
+                  "name": {
+                    "type": "string",
+                    "example": "Vaibhav"
+                  },
+                  "type": {
+                    "type": "string",
+                    "example": "CHAT"
+                  },
+                  "id": {
+                    "type": "string",
+                    "example": "01HPKHMV21AYACVMEBFNZ406Q3"
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Channel"
+        ],
+        "summary": "Update waitlist of a channel",
+        "description": "",
+        "parameters": [
+          {
+            "name": "channelType",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "channelId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Update waitlist of a channel using new users information",
+            "schema": {
+              "required": [
+                "id",
+                "uid",
+                "name"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "identifier of the host"
+                },
+                "uid": {
+                  "type": "number",
+                  "description": "identifier of the host for agora"
+                },
+                "name": {
+                  "type": "string",
+                  "description": "name of the host"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated Waitlist of the channel with channelId = params.channelId.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "uid": {
+                    "type": "number",
+                    "example": 63
+                  },
+                  "name": {
+                    "type": "string",
+                    "example": "Vaibhav"
+                  },
+                  "type": {
+                    "type": "string",
+                    "example": "CHAT"
+                  },
+                  "id": {
+                    "type": "string",
+                    "example": "01HPKHMV21AYACVMEBFNZ406Q3"
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/channel/{channelType}/{channelId}/waitlist/{waitlistId}": {
+      "delete": {
+        "tags": [
+          "Channel"
+        ],
+        "summary": "Remove a user from waitlist of a channel",
+        "description": "",
+        "parameters": [
+          {
+            "name": "channelType",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "channelId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "channelId of channel"
+          },
+          {
+            "name": "waitlistId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "waitlistId of the user"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated Waitlist of the channel with channelId = params.channelId.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "uid": {
+                    "type": "number",
+                    "example": 63
+                  },
+                  "name": {
+                    "type": "string",
+                    "example": "Vaibhav"
+                  },
+                  "type": {
+                    "type": "string",
+                    "example": "CHAT"
+                  },
+                  "id": {
+                    "type": "string",
+                    "example": "01HPKHMV21AYACVMEBFNZ406Q3"
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/channel/{channelType}/{channelId}/temp-host/": {
+      "get": {
+        "tags": [
+          "Channel"
+        ],
+        "summary": "Get temporary host of a Channel",
+        "description": "",
+        "parameters": [
+          {
+            "name": "channelType",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "channelId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "channelId of channel"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Details of the temporary host",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "ishan"
+                },
+                "uid": {
+                  "type": "number",
+                  "example": 10
+                },
+                "requestedTime": {
+                  "type": "number",
+                  "example": 1712727631201
+                },
+                "id": {
+                  "type": "string",
+                  "example": "01HV38AWF9SHJMV10292ZRSMSF"
+                },
+                "callStatus": {
+                  "type": "string",
+                  "example": "online"
+                },
+                "status": {
+                  "type": "string",
+                  "example": "REQUESTED"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Channel"
+        ],
+        "summary": "Add a temphost to a channel",
+        "description": "",
+        "parameters": [
+          {
+            "name": "channelType",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "channelId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "channelId of channel\n - users callStatus cannot be ONCALL\n - users callStatus should be ONLINE"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Details of the temporary host",
+            "required": true,
+            "schema": {
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "identifier of the temporary host"
+                },
+                "uid": {
+                  "type": "number",
+                  "description": "agora identifer of the temporary host"
+                },
+                "name": {
+                  "type": "string",
+                  "description": "name of the temporary host"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Details of the temporary host",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "ishan"
+                },
+                "uid": {
+                  "type": "number",
+                  "example": 10
+                },
+                "requestedTime": {
+                  "type": "number",
+                  "example": 1712727631201
+                },
+                "id": {
+                  "type": "string",
+                  "example": "01HV38AWF9SHJMV10292ZRSMSF"
+                },
+                "callStatus": {
+                  "type": "string",
+                  "example": "online"
+                },
+                "status": {
+                  "type": "string",
+                  "example": "REQUESTED"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/channel/{channelType}/{channelId}/temp-host/{userId}": {
+      "patch": {
+        "tags": [
+          "Channel"
+        ],
+        "summary": "Update temporary hosts status in a channel",
+        "description": "",
+        "parameters": [
+          {
+            "name": "channelType",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "channelId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "channelId of channel"
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "patch request operation values.",
+            "schema": {
+              "required": [
+                "op",
+                "path",
+                "value"
+              ],
+              "properties": {
+                "op": {
+                  "type": "string",
+                  "description": "operation for patch request: {REPLACE, ADD}"
+                },
+                "path": {
+                  "type": "string",
+                  "description": "value to change {status} "
+                },
+                "value": {
+                  "type": "string",
+                  "description": "status value\n[ACCEPTED, REJECTED, TERMINATED_BY_(ASTROLOGER, USER, SYSTEM)]"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Details of the temporary host",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "ishan"
+                },
+                "uid": {
+                  "type": "number",
+                  "example": 10
+                },
+                "requestedTime": {
+                  "type": "number",
+                  "example": 1712727631201
+                },
+                "id": {
+                  "type": "string",
+                  "example": "01HV38AWF9SHJMV10292ZRSMSF"
+                },
+                "callStatus": {
+                  "type": "string",
+                  "example": "online"
+                },
+                "status": {
+                  "type": "string",
+                  "example": "REJECTED"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/channel/{channelType}/{channelId}/host/": {
+      "patch": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "channelType",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "channelId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "op": {
+                  "example": "any"
+                },
+                "path": {
+                  "example": "any"
+                },
+                "value": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/v1/token/rtc/{channel}/{role}/{tokentype}/{uid}": {
+      "get": {
+        "tags": [
+          "Agora Control"
+        ],
+        "summary": "Generate RTC token for client",
+        "description": "",
+        "parameters": [
+          {
+            "name": "channel",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "role",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tokentype",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "uid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "expiry",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/v1/astrologer/testlol": {
+      "post": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/v1/astrologer/": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "phoneNumber",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "expertise": {
+                  "example": "any"
+                },
+                "languages": {
+                  "example": "any"
+                },
+                "experience": {
+                  "example": "any"
+                },
+                "aboutMe": {
+                  "example": "any"
+                },
+                "phoneNumber": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/v1/astrologer/{id}": {
+      "get": {
+        "tags": [
+          "Host Profile Control"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "patch": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "op": {
+                  "example": "any"
+                },
+                "path": {
+                  "example": "any"
+                },
+                "value": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/v1/{astrologer}/id/rate/{channelType?}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "astrologer",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "channelType?",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/v1/astrologer/{id}/waitlist/{channelType?}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "channelType?",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/v1/astrologer/{id}/profile/profile-pic": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "avatar": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/v1/astrologer/{id}/profile/profile-data": {
+      "post": {
+        "tags": [
+          "Host Profile Control"
+        ],
+        "summary": "Update hosts profile",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "id of the user"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Update profile information.",
+            "schema": {
+              "required": [
+                "name",
+                "profile"
+              ],
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "name of the host"
+                },
+                "aboutMe": {
+                  "type": "string",
+                  "description": "aboutMe section of the host"
+                },
+                "expertise": {
+                  "type": "string",
+                  "description": "expertises of the host ( as an array of expertises )"
+                },
+                "experience": {
+                  "type": "number",
+                  "description": "years of experience of the host"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/v1/astrologer/{id}/profile/media": {
+      "post": {
+        "tags": [
+          "Host Profile Control"
+        ],
+        "summary": "Upload hosts media",
+        "description": "",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "id of the user"
+          },
+          {
+            "name": "file",
+            "in": "formData",
+            "type": "file",
+            "required": true,
+            "description": "media"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/v1/astrologer/{id}/profile/media/{key}": {
+      "delete": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "key",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/v1/astrologer/{id}/earnings/": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "patch": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "op": {
+                  "example": "any"
+                },
+                "path": {
+                  "example": "any"
+                },
+                "value": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/v1/astrologer/{id}/notification/": {
+      "patch": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "op": {
+                  "example": "any"
+                },
+                "path": {
+                  "example": "any"
+                },
+                "value": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/v1/astrologer/{id}/notification/type/{type}/{notificationId}": {
+      "patch": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "type",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "notificationId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "op": {
+                  "example": "any"
+                },
+                "path": {
+                  "example": "any"
+                },
+                "value": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/v1/astrologer/{id}/settings/": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "patch": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "op": {
+                  "example": "any"
+                },
+                "path": {
+                  "example": "any"
+                },
+                "value": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/v1/astrologer/{id}/order/": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "startTs",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "endTs",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/v1/astrologer/{id}/profile/review/": {
+      "get": {
+        "tags": [
+          "User Review Control"
+        ],
+        "summary": "Get all reviews from startTs to endTs ",
+        "description": "Require hostId, startTs, endTs and key\\n ",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "startTs",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "starting ts to get reviews from"
+          },
+          {
+            "name": "hostId",
+            "required": true,
+            "type": "string",
+            "description": "id of the host",
+            "in": "query"
+          },
+          {
+            "name": "endTs",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "end timestamp till where to get reviews"
+          },
+          {
+            "name": "key",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "the key from which to get the left reviews from, used for pagination"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Review data ",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "userName": {
+                  "type": "string",
+                  "example": "isan"
+                },
+                "comment": {
+                  "type": "string",
+                  "example": "hi there"
+                },
+                "reply": {
+                  "type": "string",
+                  "example": ""
+                },
+                "hostId": {
+                  "type": "string",
+                  "example": "01J6VDPDEGZN7DED7TAWFQ3NWK"
+                },
+                "rating": {
+                  "type": "number",
+                  "example": 3
+                },
+                "tsUserId": {
+                  "type": "string",
+                  "example": "1731059521080#01HV9QW1W342YY2T6C4N7NVSRM"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "User Review Control"
+        ],
+        "summary": "Add a review for a host",
+        "description": "Require userId, and amount\\n ",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "hostId",
+            "required": true,
+            "type": "string",
+            "description": "id of the host",
+            "in": "query"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "userId and amount.",
+            "schema": {
+              "required": [
+                "userId",
+                "userName",
+                "rating",
+                "message"
+              ],
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "description": "comment"
+                },
+                "userId": {
+                  "type": "string",
+                  "description": "userId of the user"
+                },
+                "userName": {
+                  "type": "string",
+                  "description": "userName of the user"
+                },
+                "rating": {
+                  "type": "number",
+                  "description": "rating to give to the host"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Review data ",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "userName": {
+                  "type": "string",
+                  "example": "isan"
+                },
+                "comment": {
+                  "type": "string",
+                  "example": "hi there"
+                },
+                "reply": {
+                  "type": "string",
+                  "example": ""
+                },
+                "hostId": {
+                  "type": "string",
+                  "example": "01J6VDPDEGZN7DED7TAWFQ3NWK"
+                },
+                "rating": {
+                  "type": "number",
+                  "example": 3
+                },
+                "tsUserId": {
+                  "type": "string",
+                  "example": "1731059521080#01HV9QW1W342YY2T6C4N7NVSRM"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/astrologer/{id}/profile/review/reply/{userId}/{ts}": {
+      "get": {
+        "tags": [
+          "User Review Control"
+        ],
+        "summary": "Get reply for a review",
+        "description": "Require userId, and hostId and ts\\n ",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "id of the user that reviewed"
+          },
+          {
+            "name": "ts",
+            "in": "path",
+            "required": true,
+            "type": "number",
+            "description": "the timestamp of the review."
+          },
+          {
+            "name": "hostId",
+            "required": true,
+            "type": "string",
+            "description": "id of the host",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Review data ",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "userName": {
+                  "type": "string",
+                  "example": "isan"
+                },
+                "comment": {
+                  "type": "string",
+                  "example": "hi there"
+                },
+                "reply": {
+                  "type": "string",
+                  "example": ""
+                },
+                "hostId": {
+                  "type": "string",
+                  "example": "01J6VDPDEGZN7DED7TAWFQ3NWK"
+                },
+                "rating": {
+                  "type": "number",
+                  "example": 3
+                },
+                "tsUserId": {
+                  "type": "string",
+                  "example": "1731059521080#01HV9QW1W342YY2T6C4N7NVSRM"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "User Review Control"
+        ],
+        "summary": "Start an order for userId for amount",
+        "description": "Require userId, and amount\\n ",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "id of the user that reviewed"
+          },
+          {
+            "name": "ts",
+            "in": "path",
+            "required": true,
+            "type": "number",
+            "description": "the timestamp of the review."
+          },
+          {
+            "name": "hostId",
+            "required": true,
+            "type": "string",
+            "description": "id of the host",
+            "in": "query"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "userId and amount.",
+            "schema": {
+              "required": [
+                "message"
+              ],
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "description": "userId of the user"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Review data ",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "userName": {
+                  "type": "string",
+                  "example": "isan"
+                },
+                "comment": {
+                  "type": "string",
+                  "example": "hi there"
+                },
+                "reply": {
+                  "type": "string",
+                  "example": ""
+                },
+                "hostId": {
+                  "type": "string",
+                  "example": "01J6VDPDEGZN7DED7TAWFQ3NWK"
+                },
+                "rating": {
+                  "type": "number",
+                  "example": 3
+                },
+                "tsUserId": {
+                  "type": "string",
+                  "example": "1731059521080#01HV9QW1W342YY2T6C4N7NVSRM"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/astrologer/{id}/connections/": {
+      "post": {
+        "tags": [
+          "User Connections Control"
+        ],
+        "summary": "Add a follower of a host",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "id of the host"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Add follower of a host with this userId.",
+            "schema": {
+              "required": [
+                "userId"
+              ],
+              "properties": {
+                "userId": {
+                  "type": "string",
+                  "description": "id of the user"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "following data",
+            "in": "body",
+            "type": "object",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "hostId": {
+                  "type": "string",
+                  "example": ""
+                },
+                "userId": {
+                  "type": "string",
+                  "example": ""
+                },
+                "lastUpdated": {
+                  "type": "number",
+                  "example": 1111111111111
+                },
+                "lastCreated": {
+                  "type": "number",
+                  "example": 1111111111111
+                },
+                "status": {
+                  "type": "string",
+                  "example": "ACTIVE"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/astrologer/{id}/connections/followers": {
+      "get": {
+        "tags": [
+          "User Connections Control"
+        ],
+        "summary": "Get list of all hosts followers",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "id of the host"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "following data",
+            "in": "body",
+            "type": "array",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "hostId": {
+                    "type": "string",
+                    "example": ""
+                  },
+                  "userId": {
+                    "type": "string",
+                    "example": ""
+                  },
+                  "lastUpdated": {
+                    "type": "number",
+                    "example": 1111111111111
+                  },
+                  "lastCreated": {
+                    "type": "number",
+                    "example": 1111111111111
+                  },
+                  "status": {
+                    "type": "string",
+                    "example": "ACTIVE"
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/astrologer/{id}/connections/followers/{userId}": {
+      "get": {
+        "tags": [
+          "User Connections Control"
+        ],
+        "summary": "Get host and user following data",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "id of the host"
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "id of the user"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "following data",
+            "in": "body",
+            "type": "object",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "hostId": {
+                  "type": "string",
+                  "example": ""
+                },
+                "userId": {
+                  "type": "string",
+                  "example": ""
+                },
+                "lastUpdated": {
+                  "type": "number",
+                  "example": 1111111111111
+                },
+                "lastCreated": {
+                  "type": "number",
+                  "example": 1111111111111
+                },
+                "status": {
+                  "type": "string",
+                  "example": "ACTIVE"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/v1/astrologer/{id}/connections/following": {
+      "get": {
+        "tags": [
+          "User Connections Control"
+        ],
+        "summary": "Get list of all users following",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "id of the user"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "following data",
+            "in": "body",
+            "type": "array",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "hostId": {
+                    "type": "string",
+                    "example": ""
+                  },
+                  "userId": {
+                    "type": "string",
+                    "example": ""
+                  },
+                  "lastUpdated": {
+                    "type": "number",
+                    "example": 1111111111111
+                  },
+                  "lastCreated": {
+                    "type": "number",
+                    "example": 1111111111111
+                  },
+                  "status": {
+                    "type": "string",
+                    "example": "ACTIVE"
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/astrologer-view/{id}": {
+      "get": {
+        "tags": [
+          "Host Profile Control"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "X-ASTRO-CONTEXT",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/v1/astrologer-view/search/": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "isOnline",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "sortCategory",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "sortOrder",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "expertise",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "language",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "gender",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "topAstrologer",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/v1/astrologer-view/search/channelType/{channelType}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "channelType",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "query",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "isOnline",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "sortCategory",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "sortOrder",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "expertise",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "language",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "gender",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "topAstrologer",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/v1/astrologer-view/{id}/settings/": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "patch": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "op": {
+                  "example": "any"
+                },
+                "path": {
+                  "example": "any"
+                },
+                "value": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/v1/astrologer-view/{id}/profile/review/": {
+      "get": {
+        "tags": [
+          "User Review Control"
+        ],
+        "summary": "Get all reviews from startTs to endTs ",
+        "description": "Require hostId, startTs, endTs and key\\n ",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "startTs",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "starting ts to get reviews from"
+          },
+          {
+            "name": "hostId",
+            "required": true,
+            "type": "string",
+            "description": "id of the host",
+            "in": "query"
+          },
+          {
+            "name": "endTs",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "end timestamp till where to get reviews"
+          },
+          {
+            "name": "key",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "the key from which to get the left reviews from, used for pagination"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Review data ",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "userName": {
+                  "type": "string",
+                  "example": "isan"
+                },
+                "comment": {
+                  "type": "string",
+                  "example": "hi there"
+                },
+                "reply": {
+                  "type": "string",
+                  "example": ""
+                },
+                "hostId": {
+                  "type": "string",
+                  "example": "01J6VDPDEGZN7DED7TAWFQ3NWK"
+                },
+                "rating": {
+                  "type": "number",
+                  "example": 3
+                },
+                "tsUserId": {
+                  "type": "string",
+                  "example": "1731059521080#01HV9QW1W342YY2T6C4N7NVSRM"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "User Review Control"
+        ],
+        "summary": "Add a review for a host",
+        "description": "Require userId, and amount\\n ",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "hostId",
+            "required": true,
+            "type": "string",
+            "description": "id of the host",
+            "in": "query"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "userId and amount.",
+            "schema": {
+              "required": [
+                "userId",
+                "userName",
+                "rating",
+                "message"
+              ],
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "description": "comment"
+                },
+                "userId": {
+                  "type": "string",
+                  "description": "userId of the user"
+                },
+                "userName": {
+                  "type": "string",
+                  "description": "userName of the user"
+                },
+                "rating": {
+                  "type": "number",
+                  "description": "rating to give to the host"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Review data ",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "userName": {
+                  "type": "string",
+                  "example": "isan"
+                },
+                "comment": {
+                  "type": "string",
+                  "example": "hi there"
+                },
+                "reply": {
+                  "type": "string",
+                  "example": ""
+                },
+                "hostId": {
+                  "type": "string",
+                  "example": "01J6VDPDEGZN7DED7TAWFQ3NWK"
+                },
+                "rating": {
+                  "type": "number",
+                  "example": 3
+                },
+                "tsUserId": {
+                  "type": "string",
+                  "example": "1731059521080#01HV9QW1W342YY2T6C4N7NVSRM"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/astrologer-view/{id}/profile/review/reply/{userId}/{ts}": {
+      "get": {
+        "tags": [
+          "User Review Control"
+        ],
+        "summary": "Get reply for a review",
+        "description": "Require userId, and hostId and ts\\n ",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "id of the user that reviewed"
+          },
+          {
+            "name": "ts",
+            "in": "path",
+            "required": true,
+            "type": "number",
+            "description": "the timestamp of the review."
+          },
+          {
+            "name": "hostId",
+            "required": true,
+            "type": "string",
+            "description": "id of the host",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Review data ",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "userName": {
+                  "type": "string",
+                  "example": "isan"
+                },
+                "comment": {
+                  "type": "string",
+                  "example": "hi there"
+                },
+                "reply": {
+                  "type": "string",
+                  "example": ""
+                },
+                "hostId": {
+                  "type": "string",
+                  "example": "01J6VDPDEGZN7DED7TAWFQ3NWK"
+                },
+                "rating": {
+                  "type": "number",
+                  "example": 3
+                },
+                "tsUserId": {
+                  "type": "string",
+                  "example": "1731059521080#01HV9QW1W342YY2T6C4N7NVSRM"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "User Review Control"
+        ],
+        "summary": "Start an order for userId for amount",
+        "description": "Require userId, and amount\\n ",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "id of the user that reviewed"
+          },
+          {
+            "name": "ts",
+            "in": "path",
+            "required": true,
+            "type": "number",
+            "description": "the timestamp of the review."
+          },
+          {
+            "name": "hostId",
+            "required": true,
+            "type": "string",
+            "description": "id of the host",
+            "in": "query"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "userId and amount.",
+            "schema": {
+              "required": [
+                "message"
+              ],
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "description": "userId of the user"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Review data ",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "userName": {
+                  "type": "string",
+                  "example": "isan"
+                },
+                "comment": {
+                  "type": "string",
+                  "example": "hi there"
+                },
+                "reply": {
+                  "type": "string",
+                  "example": ""
+                },
+                "hostId": {
+                  "type": "string",
+                  "example": "01J6VDPDEGZN7DED7TAWFQ3NWK"
+                },
+                "rating": {
+                  "type": "number",
+                  "example": 3
+                },
+                "tsUserId": {
+                  "type": "string",
+                  "example": "1731059521080#01HV9QW1W342YY2T6C4N7NVSRM"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/chat/": {
+      "get": {
+        "tags": [
+          "Chat Control"
+        ],
+        "summary": "Get Chat ID(s) by User Id(s)",
+        "description": "Query single userId for list of chats of the user.\\n  \tQuery multiple userids for chatId of the particular session of users.",
+        "parameters": [
+          {
+            "name": "users",
+            "required": true,
+            "type": "string",
+            "description": "Require single userid - userid.\n Require user ids seperated by commas\n   ie - userId1, userId2",
+            "in": "query"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Initialize a chat session between one or multiple users\n   require role for identifying the host of the chat",
+            "schema": {
+              "properties": {
+                "users": {
+                  "type": "array",
+                  "description": "list of users",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "description": "identifier of the user"
+                      },
+                      "role": {
+                        "type": "string",
+                        "description": "role of the user"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Chat session details",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "userList": {
+                  "type": "string",
+                  "example": "01HPGHBN8NWGG4VFNP3PM4ND6N#01HPKDB7ENB0FDEGC62DKK00HR"
+                },
+                "users": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "lastRead": {
+                        "type": "number",
+                        "example": 1712659817975
+                      },
+                      "lastReceived": {
+                        "type": "number",
+                        "example": 1712659817975
+                      },
+                      "id": {
+                        "type": "string",
+                        "example": "01HPKDB7ENB0FDEGC62DKK00HR"
+                      },
+                      "role": {
+                        "type": "string",
+                        "example": "USER"
+                      }
+                    }
+                  }
+                },
+                "id": {
+                  "type": "string",
+                  "example": "01HV17NSFQH0J2ER62SC6H6F2M"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Chat Control"
+        ],
+        "summary": "Initialize a new chat session for users",
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Initialize a chat session between one or multiple users\n   require role for identifying the host of the chat",
+            "schema": {
+              "properties": {
+                "users": {
+                  "type": "array",
+                  "description": "list of users",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "description": "identifier of the user"
+                      },
+                      "role": {
+                        "type": "string",
+                        "description": "role of the user"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Chat session details",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "userList": {
+                  "type": "string",
+                  "example": "01HPGHBN8NWGG4VFNP3PM4ND6N#01HPKDB7ENB0FDEGC62DKK00HR"
+                },
+                "users": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "lastRead": {
+                        "type": "number",
+                        "example": 1712659817975
+                      },
+                      "lastReceived": {
+                        "type": "number",
+                        "example": 1712659817975
+                      },
+                      "id": {
+                        "type": "string",
+                        "example": "01HPKDB7ENB0FDEGC62DKK00HR"
+                      },
+                      "role": {
+                        "type": "string",
+                        "example": "USER"
+                      }
+                    }
+                  }
+                },
+                "id": {
+                  "type": "string",
+                  "example": "01HV17NSFQH0J2ER62SC6H6F2M"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "201": {
+            "description": "Created"
+          }
+        }
+      }
+    },
+    "/v1/chat/{userId}/assistant": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/v1/chat/{id}": {
+      "patch": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "op": {
+                  "example": "any"
+                },
+                "path": {
+                  "example": "any"
+                },
+                "value": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/v1/chat/assistant/{userId}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/v1/chat/assistant/": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "userId": {
+                  "example": "any"
+                },
+                "message": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/v1/chat/user/{userId}/session": {
+      "get": {
+        "tags": [
+          "Chat Control"
+        ],
+        "summary": "Get session details like chatlist and call data",
+        "description": "Gets latest unreceived messages from chat which are active",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of chats and call data",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "session": {
+                  "type": "object",
+                  "properties": {
+                    "chat": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "message": {
+                            "type": "string",
+                            "example": "ishan"
+                          },
+                          "userTs": {
+                            "type": "string",
+                            "example": "1735035199487#01JEAYQ4N490XPAP4YB9QKHQQ4"
+                          },
+                          "id": {
+                            "type": "string",
+                            "example": "01JFW1XFQ515YCKAQ8GR3C0ARS"
+                          },
+                          "sentTs": {
+                            "type": "number",
+                            "example": 1111111111111
+                          },
+                          "type": {
+                            "type": "string",
+                            "example": "text"
+                          }
+                        }
+                      }
+                    },
+                    "call": {
+                      "type": "array",
+                      "example": [],
+                      "items": {}
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/chat/{id}/user/{userId}": {
+      "patch": {
+        "tags": [
+          "Chat Control"
+        ],
+        "summary": "Modify users lastRead and lastReceived message timestamp for chat",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "identifier of the chat session"
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "identifier of the user for modifying lastReceived or lastRead"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Update waitlist of a livestream using new users information",
+            "schema": {
+              "required": [
+                "op",
+                "path",
+                "value"
+              ],
+              "properties": {
+                "op": {
+                  "type": "string",
+                  "description": "operation for patch request: {REPLACE}"
+                },
+                "path": {
+                  "type": "string",
+                  "description": "value to change {READ, RECEIVED} "
+                },
+                "value": {
+                  "type": "number",
+                  "description": "value to be assigned"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Chat session",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "userList": {
+                  "type": "string",
+                  "example": "01HPGHBN8NWGG4VFNP3PM4ND6N#01HPKDB7ENB0FDEGC62DKK00HR"
+                },
+                "users": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "lastRead": {
+                        "type": "number",
+                        "example": 1712659817975
+                      },
+                      "lastReceived": {
+                        "type": "number",
+                        "example": 1712659817975
+                      },
+                      "id": {
+                        "type": "string",
+                        "example": "01HPKDB7ENB0FDEGC62DKK00HR"
+                      },
+                      "role": {
+                        "type": "string",
+                        "example": "USER"
+                      }
+                    }
+                  }
+                },
+                "id": {
+                  "type": "string",
+                  "example": "01HV17NSFQH0J2ER62SC6H6F2M"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/chat/{id}/messages/": {
+      "get": {
+        "tags": [
+          "Chat Control"
+        ],
+        "summary": "Get list of chats starting by a timestamp or latest 50 chats",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "channelId of livestream"
+          },
+          {
+            "name": "timestamp",
+            "description": "timestamp for retrieving list of chats.\nneeds to be in epoch miliseconds",
+            "required": true,
+            "type": "number",
+            "in": "query"
+          },
+          {
+            "name": "key",
+            "description": "key for the last chat rendered in the 50 chats.\nneeds to be in epoch miliseconds",
+            "required": true,
+            "type": "number",
+            "in": "query"
+          },
+          {
+            "name": "tags",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "list of chats and their details",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "example": "text"
+                  },
+                  "ts": {
+                    "type": "string",
+                    "example": "1999999999999"
+                  },
+                  "sentBy": {
+                    "type": "string",
+                    "example": "01HPKDB7ENB0FDEGC62DKK00HR"
+                  },
+                  "message": {
+                    "type": "string",
+                    "example": "hello"
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Chat Control"
+        ],
+        "summary": "Send a new message in chat",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Send a new message in chat\n - cannot send the message having same timestamp and user\n - retrieves all the messages after the lastReceived",
+            "schema": {
+              "required": [
+                "sentBy",
+                "lastReceived",
+                "ts",
+                "message",
+                "type"
+              ],
+              "properties": {
+                "sentBy": {
+                  "type": "string",
+                  "description": "identifier of the message sender"
+                },
+                "lastReceived": {
+                  "type": "number",
+                  "description": "retrieve all the messages after lastReceived"
+                },
+                "ts": {
+                  "type": "number",
+                  "description": "timestamp of the new message sent"
+                },
+                "message": {
+                  "type": "string",
+                  "description": "actual message data, cannot be more than 1024 words"
+                },
+                "type": {
+                  "type": "string",
+                  "description": "the type of the new message\ntext, image or video."
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "list of chats and their details",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "example": "text"
+                  },
+                  "ts": {
+                    "type": "string",
+                    "example": "1999999999999"
+                  },
+                  "sentBy": {
+                    "type": "string",
+                    "example": "01HPKDB7ENB0FDEGC62DKK00HR"
+                  },
+                  "message": {
+                    "type": "string",
+                    "example": "hello"
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Chat Control"
+        ],
+        "summary": "Edit a message in chat by its timestamp",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "identifier of the chat session"
+          },
+          {
+            "name": "timestamp",
+            "description": "timestamp of the particular message to be edited",
+            "required": true,
+            "type": "number",
+            "in": "query"
+          },
+          {
+            "name": "userId",
+            "description": " - identifier of the user for modifying lastReceived or lastRead",
+            "required": true,
+            "type": "string",
+            "in": "query"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "patch request operation values.",
+            "schema": {
+              "required": [
+                "op",
+                "path",
+                "value"
+              ],
+              "properties": {
+                "op": {
+                  "type": "string",
+                  "description": "operation for patch request: {REPLACE, ADD}"
+                },
+                "path": {
+                  "type": "string",
+                  "description": "value to change {LATEST} "
+                },
+                "value": {
+                  "type": "string",
+                  "description": "new message\ncannot be more than 1024 bytes/words"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "list of chats and their details",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "example": "text"
+                  },
+                  "ts": {
+                    "type": "string",
+                    "example": "1999999999999"
+                  },
+                  "sentBy": {
+                    "type": "string",
+                    "example": "01HPKDB7ENB0FDEGC62DKK00HR"
+                  },
+                  "message": {
+                    "type": "string",
+                    "example": "hello"
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/support-case/": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "supportUserId",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "userId": {
+                  "example": "any"
+                },
+                "caseType": {
+                  "example": "any"
+                },
+                "details": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          }
+        }
+      }
+    },
+    "/v1/support-case/{id}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "patch": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "length": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/v1/support-case/user/{userId}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/v1/content/": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "channelType": {
+                  "example": "any"
+                },
+                "name": {
+                  "example": "any"
+                },
+                "format": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      },
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/v1/content/sample": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/v1/content/test": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/v1/notification/mail": {
+      "post": {
+        "tags": [
+          "Notification Control"
+        ],
+        "summary": "Send a mail to an email",
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Send the mailData to the email.",
+            "schema": {
+              "required": [
+                "email",
+                "mailData"
+              ],
+              "properties": {
+                "email": {
+                  "type": "string",
+                  "description": "email of the user"
+                },
+                "mailData": {
+                  "type": "string",
+                  "description": "mail data to send to the particular email"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/v1/order/webhook": {
+      "post": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/v1/order/": {
+      "post": {
+        "tags": [
+          "Payment Control"
+        ],
+        "summary": "Start an order for userId for amount",
+        "description": "Require userId, and amount\\n ",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "userId and amount.",
+            "schema": {
+              "required": [
+                "userId",
+                "amount"
+              ],
+              "properties": {
+                "userId": {
+                  "type": "string",
+                  "description": "userId of the user"
+                },
+                "amount": {
+                  "type": "number",
+                  "description": "amount of the order"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of payment order history",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "amount": {
+                    "type": "number",
+                    "example": 590
+                  },
+                  "createTs": {
+                    "type": "number",
+                    "example": 1733124935138
+                  },
+                  "razorPayOrderId": {
+                    "type": "string",
+                    "example": "order_PSE9XqzlDn82Ao"
+                  },
+                  "paymentDetails": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "method": {
+                          "type": "string",
+                          "example": "upi"
+                        },
+                        "id": {
+                          "type": "string",
+                          "example": "pay_PSE9izrt8uixSz"
+                        },
+                        "status": {
+                          "type": "string",
+                          "example": "captured"
+                        }
+                      }
+                    }
+                  },
+                  "userId": {
+                    "type": "string",
+                    "example": "01JDVMQ65RZWCR4ZWCFTT46VWC"
+                  },
+                  "status": {
+                    "type": "string",
+                    "example": "paid"
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/v1/order/user/{userId}": {
+      "get": {
+        "tags": [
+          "Payment Control"
+        ],
+        "summary": "Get Payment history by userId based on timestamp and last key",
+        "description": "Require userId, startTs, endTs and key.\\n  \t\"key\" is used for timestamp of the last order",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "startTs",
+            "in": "query",
+            "required": true,
+            "type": "number",
+            "description": "timestamp from where to get the orders"
+          },
+          {
+            "name": "endTs",
+            "required": true,
+            "type": "number",
+            "description": "timestamp till where to get the orders",
+            "in": "query"
+          },
+          {
+            "name": "key",
+            "required": true,
+            "type": "number",
+            "description": "the key of the last received orders timestamp for querying next.",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of payment order history",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "amount": {
+                    "type": "number",
+                    "example": 590
+                  },
+                  "createTs": {
+                    "type": "number",
+                    "example": 1733124935138
+                  },
+                  "razorPayOrderId": {
+                    "type": "string",
+                    "example": "order_PSE9XqzlDn82Ao"
+                  },
+                  "paymentDetails": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "method": {
+                          "type": "string",
+                          "example": "upi"
+                        },
+                        "id": {
+                          "type": "string",
+                          "example": "pay_PSE9izrt8uixSz"
+                        },
+                        "status": {
+                          "type": "string",
+                          "example": "captured"
+                        }
+                      }
+                    }
+                  },
+                  "userId": {
+                    "type": "string",
+                    "example": "01JDVMQ65RZWCR4ZWCFTT46VWC"
+                  },
+                  "status": {
+                    "type": "string",
+                    "example": "paid"
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/order/{orderId}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "orderId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "patch": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "orderId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "op": {
+                  "example": "any"
+                },
+                "path": {
+                  "example": "any"
+                },
+                "value": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/v1/gifts/": {
+      "get": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "giftAmount": {
+                  "example": "any"
+                },
+                "giftName": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/v1/gifts/{giftId}": {
+      "patch": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "giftId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "op": {
+                  "example": "any"
+                },
+                "path": {
+                  "example": "any"
+                },
+                "value": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/v1/session/user/{id}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "role": {
+                  "example": "any"
+                },
+                "expiry": {
+                  "example": "any"
+                },
+                "tokentype": {
+                  "example": "any"
+                },
+                "deviceId": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/v1/session/user/{id}/{deviceId}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deviceId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/v1/meta-data/": {
+      "get": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/v1/meta-data/{type}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "type",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "type",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "metaData": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/v1/astrologer/cache/": {
+      "patch": {
+        "tags": [
+          "Pusher Control"
+        ],
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/v1/razorpay/{orderId}/capture": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "orderId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  }
+}
