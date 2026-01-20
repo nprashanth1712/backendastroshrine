@@ -1254,9 +1254,12 @@ export class ChannelDao {
     const hostData = data.host || {};
     const userData = hostData.user || {};
     
+    // Ensure host_uid is a valid number for Agora
+    const hostUid = data.host_uid ? Number(data.host_uid) : 0;
+    
     const host = {
       id: hostData.id || data.host_id,
-      uid: data.host_uid,
+      uid: hostUid,
       name: hostData.display_name || hostData.name || userData.username || userData.name || 'Unknown',
       displayName: hostData.display_name,
       rating: hostData.rating,
