@@ -85,6 +85,16 @@ export class ChannelDao {
     waitlist: Waitlist[];
     approxWaitTime: number;
   }): Promise<Channel> {
+    // End any existing live channels for this host to prevent duplicates
+    await supabaseAdmin
+      .from('channels')
+      .update({ 
+        status: 'ENDED', 
+        ended_at: new Date().toISOString() 
+      })
+      .eq('host_id', astrologer.id)
+      .eq('status', 'LIVE');
+    
     // Get next channel token
     const channelToken = await this.nextChannelToken();
 
@@ -255,6 +265,7 @@ export class ChannelDao {
 
   /**
    * Get all online channels
+   * Returns only the most recent channel per host to avoid duplicates
    */
   static async getAllOnlineChannels(): Promise<Channel[]> {
     const { data, error } = await supabaseAdmin
@@ -264,10 +275,24 @@ export class ChannelDao {
         host:astrologers(*, user:users(username, profile_image))
       `)
       .eq('status', 'LIVE')
-      .order('viewer_count', { ascending: false });
+      .order('created_at', { ascending: false });
 
     if (error) throw error;
-    return (data || []).map(this.mapToChannel);
+    
+    // Deduplicate by host_id - keep only the most recent channel per host
+    const seenHosts = new Set<string>();
+    const uniqueChannels = (data || []).filter(channel => {
+      if (!channel.host_id || seenHosts.has(channel.host_id)) {
+        return false;
+      }
+      seenHosts.add(channel.host_id);
+      return true;
+    });
+    
+    // Sort by viewer_count after deduplication
+    uniqueChannels.sort((a, b) => (b.viewer_count || 0) - (a.viewer_count || 0));
+    
+    return uniqueChannels.map(this.mapToChannel);
   }
 
   /**
