@@ -13,6 +13,13 @@ const sqsClient = new SQSClient({
 });
 
 export const sendMessageToSQS = async ({ messageRequest }: { messageRequest: QueueMessageSQSRequest }) => {
+	// Check if SQS is configured
+	if (!process.env.AWS_ACCESS_KEY_ID || !process.env.AWS_SECRET_ACCESS_KEY || 
+	    process.env.AWS_ACCESS_KEY_ID === 'dummy' || process.env.AWS_ACCESS_KEY_ID.includes('dummy')) {
+		console.log(`[SQS] Skipping SQS message (not configured): ${messageRequest.requestType}`);
+		return null;
+	}
+
 	try {
 		const params: SendMessageCommand = new SendMessageCommand({
 			DelaySeconds: messageRequest.timeToDelay,
@@ -31,11 +38,9 @@ export const sendMessageToSQS = async ({ messageRequest }: { messageRequest: Que
 		console.log(response);
 		return response;
 	} catch (error) {
-		throw {
-			statusCode: 400,
-			code: "ErrorSendingMessageToSqs",
-			message: "Error while sending the request " + messageRequest.requestType,
-		};
+		// Log error but don't block the request - SQS is for background processing
+		console.error(`[SQS] Failed to send message (${messageRequest.requestType}):`, error);
+		return null;
 	}
 };
 
