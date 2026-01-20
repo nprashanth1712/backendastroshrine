@@ -88,34 +88,29 @@ async function getAllOnlineChannelsController(req: Request, res: GetChannelsResp
 	*/
 
 	try {
-		console.time();
+		console.time("getAllOnlineChannels");
 		const { channelType }: { channelType?: ChannelType } = req.params;
 
-		// if (!channelType) {
-		// 	res.status(400).json({ err: missingParameter("channelType") });
-		// 	return;
-		// }
+		// Get all online channels - already includes host data
+		const channels: Array<Channel> = await getAllOnlineChannels();
+		
+		console.timeEnd("getAllOnlineChannels");
+		console.log(`Found ${channels.length} live channels`);
 
-		const channelIndex: Array<Channel> = await getAllOnlineChannels();
-		const channels: Array<Channel> = await Promise.all(
-			channelIndex.map(async (value) => {
-				const currentChannel = await getHostChannel(value);
-				return currentChannel;
-			})
-		);
-
-		console.timeEnd();
-		console.log(channels);
+		// Filter by channelType if provided
 		let channelsArray: Array<Channel> = [];
 		if (channelType) {
 			channelsArray = channels.filter(
-				(value) => value.channelType?.toLowerCase() == channelType.toLowerCase()
+				(value) => value && value.channelType?.toLowerCase() === channelType.toLowerCase()
 			);
+			console.log(`Filtered to ${channelsArray.length} ${channelType} channels`);
 		} else {
-			channelsArray = channels;
+			channelsArray = channels.filter(value => value != null);
 		}
+		
+		// Sort by ranking
 		channelsArray.sort((x, y) => {
-			return x.ranking - y.ranking;
+			return (x.ranking || 100) - (y.ranking || 100);
 		});
 
 		res.json(channelsArray ?? []);

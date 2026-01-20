@@ -44,6 +44,8 @@ interface Channel {
   tempHostsList?: TempHost[];
   ranking?: number;
   approxWaitTime?: number;
+  viewerCount?: number;
+  tags?: string[];
 }
 
 interface AstrologerCurrentChannel {
@@ -1158,6 +1160,7 @@ export class ChannelDao {
    * user_id is UUID type and can't accept non-UUID strings like "RECORDING_xxx"
    */
   private static async getOrCreateRecordingSession(channelId: string, deviceId: string): Promise<any> {
+    // Query by session_type and metadata instead of user_id (which is UUID type)
     const { data: existing, error: fetchError } = await supabaseAdmin
       .from('sessions')
       .select('*')
@@ -1222,10 +1225,32 @@ export class ChannelDao {
   private static mapToChannel(data: any): Channel {
     if (!data) return {} as Channel;
 
+    // Build host object with proper name field
+    const hostData = data.host || {};
+    const userData = hostData.user || {};
+    
+    const host = {
+      id: hostData.id || data.host_id,
+      uid: data.host_uid,
+      name: hostData.display_name || hostData.name || userData.username || userData.name || 'Unknown',
+      displayName: hostData.display_name,
+      rating: hostData.rating,
+      totalReviews: hostData.total_reviews,
+      profileImage: hostData.host_profile?.profilePicture || userData.profile_image,
+      hostProfile: hostData.host_profile,
+      specialties: hostData.specialties,
+      languages: hostData.languages,
+      chatRate: hostData.chat_rate,
+      callRate: hostData.call_rate,
+      hourlyRate: hostData.hourly_rate,
+      isOnline: hostData.is_online,
+      isAvailable: hostData.is_available,
+    };
+
     return {
       channelId: data.agora_channel_name || data.host_id || data.id,
       channelType: data.channel_type || 'LIVESTREAM',
-      host: data.host || { id: data.host_id },
+      host,
       rate: Number(data.rate) || 0,
       channelName: data.title,
       recordingUid: data.recording_uid,
@@ -1239,6 +1264,8 @@ export class ChannelDao {
       tempHostsList: data.temp_hosts_list || [],
       ranking: data.ranking || 100,
       approxWaitTime: data.approx_wait_time || 0,
+      viewerCount: data.viewer_count || 0,
+      tags: hostData.tags || [],
     };
   }
 }
